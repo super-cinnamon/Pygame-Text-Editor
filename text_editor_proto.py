@@ -1,5 +1,5 @@
 import pygame
-import Button
+from Button import Button
 
 pygame.init()
 screen = pygame.display.set_mode((500,500))
@@ -16,7 +16,7 @@ text = ''
 running = True
 
 
-run_button = Button(300,300,)
+run_button = Button(400,420,pygame.image.load('exit_btn.png').convert_alpha(), 0.3)
 
 def blit_text(surface, text, pos, font, color=pygame.Color('black')):
     words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
@@ -38,7 +38,11 @@ def blit_text(surface, text, pos, font, color=pygame.Color('black')):
 
 
 while running:
+	screen.fill(bgc)
+	run_button.on_screen(screen)
 	for event in pygame.event.get():
+		if run_button.draw(screen):
+			exec(text)
 		if event.type == pygame.QUIT:
 			running = False
 		if event.type == pygame.KEYDOWN:
@@ -46,10 +50,11 @@ while running:
 				text += '\n'
 			elif event.key == pygame.K_BACKSPACE:
 				text = text[:-1]
+			elif event.key == pygame.K_TAB:
+				text += '    '
 			else:
 				text += event.unicode
 	# Render the current text.
-	screen.fill(bgc)
 	txt_surface = font.render(text, True, color)
 	# text_rect = txt_surface.get_rect()
 	# Resize the box if the text is too long.

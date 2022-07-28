@@ -28,3 +28,7 @@ class Button():
 		surface.blit(self.image, (self.rect.x, self.rect.y))
 
 		return action
+	
+	def on_screen(self, surface):
+		surface.blit(self.image, (self.rect.x, self.rect.y))
+		
