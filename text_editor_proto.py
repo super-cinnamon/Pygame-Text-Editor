@@ -1,4 +1,5 @@
 import pygame
+import Button
 
 pygame.init()
 screen = pygame.display.set_mode((500,500))
@@ -14,6 +15,8 @@ text = ''
 
 running = True
 
+
+run_button = Button(300,300,)
 
 def blit_text(surface, text, pos, font, color=pygame.Color('black')):
     words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
