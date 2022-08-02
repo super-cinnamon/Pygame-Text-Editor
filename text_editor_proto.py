@@ -39,10 +39,14 @@ def blit_text(surface, text, pos, font, color=pygame.Color('black')):
 
 while running:
 	screen.fill(bgc)
-	run_button.on_screen(screen)
+	run_button.draw(screen)
 	for event in pygame.event.get():
 		if run_button.draw(screen):
-			exec(text)
+			try:
+				compile(text+' ', 'test', 'exec')
+			except Exception as e:
+				print ("Problem: %s" % e)
+			else: exec(compile(text+' ', 'test', 'exec'))
 		if event.type == pygame.QUIT:
 			running = False
 		if event.type == pygame.KEYDOWN:
